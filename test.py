@@ -62,3 +62,6 @@ for job in list_items:
 job_list = zip(job_titles, company_names, job_details)
 
 # put into CSV file -> MySQL
+with open('test.csv', 'w', newline="") as f:
+    writer = csv.writer(f)
+    writer.writerow(job_list)
