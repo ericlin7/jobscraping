@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
+import csv
 
 s = Service('./chromedriver')
 driver = webdriver.Chrome(service=s)
@@ -58,14 +59,6 @@ for job in list_items:
     details = driver.find_element(By.ID,"job-details").text
     job_details.append(details)
 
-# clean job details
+job_list = zip(job_titles, company_names, job_details)
 
-
-# put into CSV file -> database
-# writing the corresponding values to the header
-writer.writerow([name.encode('utf-8'),
-                 job_title.encode('utf-8'),
-                 company.encode('utf-8'),
-                 college.encode('utf-8'),
-                 location.encode('utf-8'),
-                 linkedin_url.encode('utf-8')])
+# put into CSV file -> MySQL
