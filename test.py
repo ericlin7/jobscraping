@@ -3,9 +3,9 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
+from bs4 import BeautifulSoup
 
-# direct webdriver where the browser file is:
-s = Service('/Users/jiayuetian/Downloads/chromedriver')
+s = Service('./chromedriver')
 driver = webdriver.Chrome(service=s)
 
 # your secret credentials:
@@ -27,19 +27,45 @@ time.sleep(3)
 
 # find the keywords/location search bars:
 search_keywords = driver.find_element(By.ID,'jobs-search-box-keyword-id-ember30')
-search_keywords.send_keys(keywords)
-    
+search_keywords.send_keys(keywords) 
 search_location = driver.find_element(By.ID,'jobs-search-box-location-id-ember30')
 search_location.send_keys(location + Keys.ENTER)
 
-list_items = driver.find_elements(By.CLASS_NAME,"occludable-update")
+# make beautifulsoup object
+job_src = driver.page_source  
+soup = BeautifulSoup(job_src, 'lxml')  
+
+# job_title
+jobs_html = soup.find_all('a', {'class': 'job-card-list__title'})
+job_titles = []
+for title in jobs_html:
+    job_titles.append(title.text.strip())  
+
+# company_name
+company_name_html = soup.find_all(
+  'div', {'class': 'job-card-container__company-name'})
+company_names = []
+for name in company_name_html:
+    company_names.append(name.text.strip()) 
+
+# job description
+time.sleep(3)
+job_details = []
+list_items = driver.find_elements_by_class_name("occludable-update")
 for job in list_items:
-    # executes JavaScript to scroll the div into view
-    driver.execute_script("arguments[0].scrollIntoView();", job)
     job.click()
     time.sleep(3)
-    # get info:
-    [position, company, location] = job.text.split('\n')[:3]
     details = driver.find_element(By.ID,"job-details").text
-    # do what you want with that info...
-    print(details)
+    job_details.append(details)
+
+# clean job details
+
+
+# put into CSV file -> database
+# writing the corresponding values to the header
+writer.writerow([name.encode('utf-8'),
+                 job_title.encode('utf-8'),
+                 company.encode('utf-8'),
+                 college.encode('utf-8'),
+                 location.encode('utf-8'),
+                 linkedin_url.encode('utf-8')])
