@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
 import csv
+import mysql.connector
 
 s = Service('./chromedriver')
 driver = webdriver.Chrome(service=s)
@@ -13,7 +14,7 @@ driver = webdriver.Chrome(service=s)
 email = "wangmaria923@gmail.com"
 password = "74$ppkt123"
 
-keywords = "Software"
+keywords = "Software intern"
 location = "Toronto"
 
 # Go to linkedin and login
@@ -65,3 +66,6 @@ job_list = zip(job_titles, company_names, job_details)
 with open('test.csv', 'w', newline="") as f:
     writer = csv.writer(f)
     writer.writerow(job_list)
+
+# connect to mysql
+connection = mysql.connector.connect(host='localhost', database='database', user='root', password='74$ppkt123')
