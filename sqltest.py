@@ -20,6 +20,8 @@ mycursor.execute("CREATE TABLE Jobs (title VARCHAR(50), names smallint UNSIGNED,
 #for x in mycursor:
 #    print(x)  
 
+
+
 csv_data = csv.reader('test.csv')
 for row in csv_data:
 

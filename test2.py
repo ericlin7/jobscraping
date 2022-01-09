@@ -1,4 +1,4 @@
-skills = ["Scala, Java, React/Redux, HTML, CSS, JavaScript"]
+skills = ["Scala", "Java", "React/Redux", "HTML", "CSS", "JavaScript", "C++", "Python", "SQL"]
 
 des = """Responsibilities:
 Support the engineering team with software development; design and implement scalable systems and infrastructures
@@ -19,5 +19,5 @@ Self-motivated, smart, hands-on, relentlessly focused on impact, and able to ope
 Expected to complete degree by December 2023 or earlier"""
 
 for a in skills:
-    if des.find(a):
+    if (a in des):
         print(a)
