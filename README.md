@@ -8,6 +8,8 @@
 
 
 ## Description
-Whenn ur lazyy as fuck use our python sscript!
+THe pYThON scipt iss OP! 
 
-**Home Page:**
+**Job Scraping:**
+
+![alt text](https://github.com/ericlin7/jobscraping/blob/main/scraping.png)
