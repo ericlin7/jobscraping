@@ -96,15 +96,20 @@ print(zipped)
 with open('{}.csv'.format(email), 'w', newline="") as f:
     writer = csv.writer(f)
     list = [location]
-    writer.writerow(list)
-    for job in zipped:
-        writer.writerow(job)
+    writer.writecol(list)
+    count = 0
+    test = []
+    for x in zipped:
+        test.append(job_titles[count])
+        test.append(company_names[count])
+        test.append(job_details[count])
+        writer.writerow(test)
+        test.clear()
+        count += 1
 
 
 csvData = pandasForSortingCSV.read_csv('{}.csv'.format(email))
 print(csvData)
 
 csvData.sort_values()
-# connect to mysql
-#connection = mysql.connector.connect(host='localhost', database='database', user='root', password='74$ppkt123')
 
