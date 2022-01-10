@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
 import csv
 import mysql.connector
+import pandas as pandasForSortingCSV
 
 email = input("Please enter email: ")
 
@@ -94,8 +95,16 @@ print(zipped)
 # put into CSV file -> MySQL
 with open('{}.csv'.format(email), 'w', newline="") as f:
     writer = csv.writer(f)
+    list = [location]
+    writer.writerow(list)
     for job in zipped:
         writer.writerow(job)
 
+
+csvData = pandasForSortingCSV.read_csv('{}.csv'.format(email))
+print(csvData)
+
+csvData.sort_values()
 # connect to mysql
 #connection = mysql.connector.connect(host='localhost', database='database', user='root', password='74$ppkt123')
+
