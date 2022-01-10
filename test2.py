@@ -1,23 +1,18 @@
-skills = ["Scala", "Java", "React/Redux", "HTML", "CSS", "JavaScript", "C++", "Python", "SQL"]
 
-des = """Responsibilities:
-Support the engineering team with software development; design and implement scalable systems and infrastructures
-Measure our work thoroughly, analyze results, and generate hypotheses to drive new product changes through A/B testing
-Setup monitoring and testing of our APIs and services to better understand real time health of our products
-Code software using Scala and Java
-Implement web interfaces using React/Redux, HTML, CSS, and JavaScript
-Work in a cross functional team of engineers, PMs, designers, and UX researchers
+email = input("Please enter email: ")
 
-Basic Qualifications:
-Currently pursuing a B.A./B.S. Degree or higher in Computer Science, or related technical field
-Must be currently enrolled in a full time degree program and returning to the program after the completion of the internship
+password = input("Please enter password ")
 
-Preferred Qualifications:
-Strong competencies in data structures, algorithms and software design
-Demonstrated software engineer experience via an internship, work experience, school projects or coding competitions.
-Self-motivated, smart, hands-on, relentlessly focused on impact, and able to operate under a great deal of independence
-Expected to complete degree by December 2023 or earlier"""
+title = input("Please enter job title you are looking for: ")
 
-for a in skills:
-    if (a in des):
-        print(a)
+location = input("Please type in your location: ")
+
+skills = []
+user = input("Enter Skills type x to stop: ")
+
+while(user != "x"):
+    user = input("Enter Skills type x to stop: ")
+    skills.append(user)
+
+skills.pop()
+print(skills)
