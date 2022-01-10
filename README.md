@@ -8,7 +8,7 @@
 
 
 ## Description
-THe pYThON scipt iss OP! 
+This python script helps you find job on LinkedIn 30% faster! It uses selenium for automatic login and utilizes Beautiful soup to webscrape neccsary info on jobs. 
 
 **Job Scraping:**
 
