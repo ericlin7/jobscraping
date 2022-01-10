@@ -7,6 +7,8 @@ from bs4 import BeautifulSoup
 import csv
 import mysql.connector
 import pandas as pandasForSortingCSV
+import pandas as pd 
+
 
 email = input("Please enter email: ")
 
@@ -67,9 +69,10 @@ count = 0
 for job in list_items:
     job.click()
     time.sleep(3)
-    details = driver.find_element(By.ID,"job-details").text 
+    details = driver.find_element(By.ID,"job-details").text.lower()
     for a in skills:
-        if (a in details):
+        lower_a = a.lower()
+        if (lower_a in details):
             skill_match.append(a)        
     job_details.append(skill_match.copy())
     skill_match.clear()
@@ -88,22 +91,20 @@ for job in list_items:
         company_name_html = soup.find_all('a', {'class': 'job-card-container__company-name'})
         for name in company_name_html:
             company_names.append(name.text.strip()) 
-print(company_names)
 job_list = zip(job_titles, company_names, job_details)
 zipped = list(job_list)
-print(zipped)
 # put into CSV file -> MySQL
 with open('{}.csv'.format(email), 'w', newline="") as f:
     writer = csv.writer(f)
-    list = [location]
-    writer.writecol(list)
+    #list = [location]
+    #writer.writerow(list)
     for job in zipped:
-        for a in job:
-            writer.writerow(a)
+        writer.writerow(job)
 
-
-csvData = pandasForSortingCSV.read_csv('{}.csv'.format(email))
-print(csvData)
-
-csvData.sort_values()
-
+df = pd.read_csv('{}.csv'.format(email))
+df.columns = ["Job Title", "Company", "Relevant Skills"]
+df['len'] = df['Relevant Skills'].str.len()
+df = df.sort_values(by='len', ascending=False)
+df = df.drop('len', 1)
+print(df)
+df.to_csv('{}.csv'.format(email))
