@@ -92,7 +92,7 @@ job_list = zip(job_titles, company_names, job_details)
 zipped = list(job_list)
 print(zipped)
 # put into CSV file -> MySQL
-with open('test.csv', 'w', newline="") as f:
+with open('new.csv', 'w', newline="") as f:
     writer = csv.writer(f)
     writer.writerow(zipped)
 
