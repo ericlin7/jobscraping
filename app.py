@@ -94,7 +94,8 @@ print(zipped)
 # put into CSV file -> MySQL
 with open('{}.csv'.format(email), 'w', newline="") as f:
     writer = csv.writer(f)
-    writer.writerow(zipped)
+    for job in zipped:
+        writer.writerow(job)
 
 # connect to mysql
 #connection = mysql.connector.connect(host='localhost', database='database', user='root', password='74$ppkt123')
