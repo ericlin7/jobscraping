@@ -97,15 +97,9 @@ with open('{}.csv'.format(email), 'w', newline="") as f:
     writer = csv.writer(f)
     list = [location]
     writer.writecol(list)
-    count = 0
-    test = []
-    for x in zipped:
-        test.append(job_titles[count])
-        test.append(company_names[count])
-        test.append(job_details[count])
-        writer.writerow(test)
-        test.clear()
-        count += 1
+    for job in zipped:
+        for a in job:
+            writer.writerow(a)
 
 
 csvData = pandasForSortingCSV.read_csv('{}.csv'.format(email))
